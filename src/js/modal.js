@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const data = JSON.parse(localStorage.getItem('list')) || [];
   // console.log(data);
 
-  createNoteBtn.addEventListener('click', () => {
-    createNote({ res: 1 });
+  createNoteBtn.addEventListener('click', e => {
+    modalForm(e);
   });
 
   const confirm = inputData => {
@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
       createDate: getDate(),
       content: inputData.contentInput,
       nameInput: inputData.nameInput,
+      mode: inputData.mode,
     };
     data.push(record);
     localStorage.setItem('list', JSON.stringify(data));
@@ -62,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         categoryID: document.querySelector('#category').value,
         contentInput: document.querySelector('#contentInput').value,
         nameInput: document.querySelector('#nameInput').value,
+        mode: 'add',
       };
       confirm(data);
     });
@@ -89,17 +91,19 @@ document.addEventListener('DOMContentLoaded', () => {
     )
     .join('');
 
-  const modalForm = e => {
-    if (!e.target.closest('.rawCommon')) {
-      return false;
-    }
+  const modalForm = (e, mode) => {
+    // if (!e.target.closest('.rawCommon')) {
+    //   return false;
+    // }
     const currentCardId = e.target.closest('.rawCommon');
     const closeSVG = require('../images/close-svgrepo-com.svg');
     console.log(currentCardId);
     console.log(e);
+    const title = mode === 'add' ? 'Add note' : 'Edit note';
 
     const form_html = `
-      <form class="form">
+    <form class="form">
+    <h3>${title}</h3>
         <button type="button" class="btn-close" id="btn-close">
           <img src="${closeSVG}" width="32" height="32" alt="close" />
         </button>
@@ -151,20 +155,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // console.log(form_html);
 
     modalFormElement.innerHTML = form_html;
-    console.log(modalFormElement);
-    console.dir(document.querySelector('#category'));
-    console.log(e);
-    document.querySelector('#category').value;
+    // console.log(modalFormElement);
+    // console.dir(document.querySelector('#category'));
+    // console.log(e);
+    // document.querySelector('#category').value;
 
     openModal(data);
   };
   // console.log(modalForm());
   // document.addEventListener('click', modalForm);
-  document.querySelector('.tableHeader').addEventListener('click', modalForm);
-  var btn = document.getElementById('myBtn');
+  document
+    .querySelector('.tableHeader')
+    .addEventListener('click', e => modalForm(e, 'edit'));
+  var btn = document.querySelector('.create-note');
   btn.addEventListener('click', e => {
     console.log('first');
-    modalForm(e);
+    modalForm(e, 'add');
     // console.log(modalForm());
     // modal.style.display = 'block';
   });

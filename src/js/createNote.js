@@ -4,9 +4,6 @@ const record = {};
 const createNote = data => {
   console.log(data);
   const listOfTask = document.querySelector('.tableHeader');
-  console.log(`${data.catImg}`);
-  // const shoppingCartSVG = require(`../images/${data.catImg.trim()}.svg`);
-  // const shoppingCartSVG = require(`../images/shopping-cart-svgrepo-com.svg`);
   const editSVG = require('../images/edit-svgrepo-com.svg');
   const deleteSVG = require('../images/delete-svgrepo-com.svg');
   const archiveSVG = require('../images/archive-svgrepo-com.svg');
