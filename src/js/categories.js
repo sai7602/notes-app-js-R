@@ -1,23 +1,23 @@
 const categories = [
   {
-    catId: 1,
+    catId: '1',
     catName: 'Task',
-    catImg: 'shopping-cart-svgrepo-com',
+    catImg: require(`../images/shopping-cart-svgrepo-com.svg`),
   },
   {
-    catId: 2,
+    catId: '2',
     catName: 'Random Thought',
-    catImg: 'idea-think-svgrepo-com',
+    catImg: require(`../images/idea-think-svgrepo-com.svg`),
   },
   {
-    catId: 3,
+    catId: '3',
     catName: 'Idea',
-    catImg: 'idea-svgrepo-com',
+    catImg: require(`../images/idea-svgrepo-com.svg`),
   },
   {
-    catId: 4,
+    catId: '4',
     catName: 'Quote',
-    catImg: 'quote-right-svgrepo-com',
+    catImg: require(`../images/quote-right-svgrepo-com.svg`),
   },
 ];
 
