@@ -1,77 +1,20 @@
 import '../scss/components/_modal-form.scss';
 import categories from './categories';
-import createNote from './createNote';
-import getDate from './getDate';
+
+import renderPage from './renderPage';
+import addRecordModal from './addRecordModal';
+import openModal from './openModal';
 
 document.addEventListener('DOMContentLoaded', () => {
   const modalFormElement = document.getElementById('modal_form');
   const createNoteBtn = document.querySelector('.create-note');
   const data = JSON.parse(localStorage.getItem('list')) || [];
-  // console.log(data);
 
   createNoteBtn.addEventListener('click', e => {
     modalForm(e);
   });
 
-  const confirm = inputData => {
-    console.log(inputData);
-    const category = categories.filter(
-      cat => cat.catId === inputData.categoryID
-    );
-    console.log(category);
-    const record = {
-      catId: category[0].catId,
-      catName: category[0].catName,
-      catImg: category[0].catImg,
-      createDate: getDate(),
-      content: inputData.contentInput,
-      nameInput: inputData.nameInput,
-      mode: inputData.mode,
-    };
-    data.push(record);
-    localStorage.setItem('list', JSON.stringify(data));
-    closeModal();
-    renderPage();
-  };
-
-  const renderPage = () => {
-    console.log(data);
-    const renderData = data
-      .map(
-        rec => `
-    ${createNote(rec)}
-
-    `
-      )
-      .join('');
-    const listOfTask = document.querySelector('.tableHeader');
-    // listOfTask.innerHTML = '';
-    listOfTask.insertAdjacentHTML('beforeend', renderData);
-  };
   renderPage();
-  const openModal = () => {
-    document.querySelector('#btn-close').addEventListener('click', () => {
-      closeModal();
-    });
-    document.querySelector('#btn-cancel').addEventListener('click', () => {
-      closeModal();
-    });
-
-    document.querySelector('#btn-confirm').addEventListener('click', e => {
-      e.preventDefault();
-      const data = {
-        categoryID: document.querySelector('#category').value,
-        contentInput: document.querySelector('#contentInput').value,
-        nameInput: document.querySelector('#nameInput').value,
-        mode: 'add',
-      };
-      confirm(data);
-    });
-    document
-      .getElementById('modal_form')
-      .closest('.modal_overlay')
-      .classList.add('active');
-  };
 
   const closeModal = (e = false) => {
     if (e) {
@@ -84,37 +27,50 @@ document.addEventListener('DOMContentLoaded', () => {
       .classList.remove('active');
     modalFormElement.innerHTML = '';
   };
-  const optionList = categories
-    .map(
-      category =>
-        `<option value="${category.catId}">${category.catName}</option>`
-    )
-    .join('');
+  const optionList = (selected = '1') =>
+    categories
+      .map(category =>
+        selected == category.catId
+          ? `<option value="${category.catId}" selected>${category.catName}</option>`
+          : `<option value="${category.catId}" >${category.catName}</option>`
+      )
+      .join('');
 
   const modalForm = (e, mode) => {
-    // if (!e.target.closest('.rawCommon')) {
-    //   return false;
-    // }
-    const currentCardId = e.target.closest('.rawCommon');
-    const closeSVG = require('../images/close-svgrepo-com.svg');
-    console.log(currentCardId);
-    console.log(e);
-    const title = mode === 'add' ? 'Add note' : 'Edit note';
-
-    const form_html = `
-    <form class="form">
-    <h3>${title}</h3>
-        <button type="button" class="btn-close" id="btn-close">
-          <img src="${closeSVG}" width="32" height="32" alt="close" />
-        </button>
-        <div class="input-container">
+    let form_html = '';
+    if (mode == 'add') {
+      addRecordModal(optionList(), data);
+    } else if (
+      e.target.closest('[data-mode]') &&
+      e.target.closest('[data-mode]').dataset.mode == 'edit'
+    ) {
+      const catId = data.filter(
+        el => el.recordId == e.target.closest('[data-mode]').dataset.id
+      )[0].catId;
+      const closeSVG = require('../images/close-svgrepo-com.svg');
+      const title = mode === 'add' ? 'Add note' : 'Edit note';
+      const noteName =
+        e.target.parentElement.parentElement.children[1].innerHTML;
+      const contentInputValue =
+        e.target.parentElement.parentElement.children[4].innerHTML;
+      form_html = `
+        <form class="form">
+          <div>
+            <h3 class="modal-title">${title}</h3>
+            <button type="button" class="btn-close" id="btn-close">
+              <img src="${closeSVG}" width="32" height="32" alt="close" />
+            </button>
+          </div>
+          <div class="input-container">
             <label>
               Note Name
               <input
                 type="text"
                 name="notes-name"
                 id="nameInput"
-                placeholder="Input note name" required
+                value="${noteName}"
+                placeholder="Input note name"
+                required
               />
             </label>
 
@@ -124,61 +80,96 @@ document.addEventListener('DOMContentLoaded', () => {
                 type="text"
                 name="notes-name"
                 id="contentInput"
-                placeholder="Input note name" required
-              ></textarea>
+                placeholder="Input note name"
+                required
+              >
+${contentInputValue}</textarea
+              >
             </label>
 
-          <select id="category" name="category">
-            ${optionList}
-          </select>
-        </div>
-        <div class="form__btn-list">
-          <button
-
-            id="btn-cancel"
-            class="form-button form-btn"
-            type="button"
-          >
-            Cancel
-          </button>
-          <button
-
-            id="btn-confirm"
-            class="form-button form-btn"
-            type="submit"
-          >
-            Confirm
-          </button>
-        </div>
-      </form>
-    `;
-    // console.log(form_html);
-
-    modalFormElement.innerHTML = form_html;
-    // console.log(modalFormElement);
-    // console.dir(document.querySelector('#category'));
-    // console.log(e);
-    // document.querySelector('#category').value;
-
-    openModal(data);
+            <select id="category" name="category">
+              ${optionList(catId)}
+            </select>
+          </div>
+          <div class="form__btn-list">
+            <button id="btn-cancel" class="form-button form-btn" type="button">
+              Cancel
+            </button>
+            <button
+              id="btn-confirm-edit"
+              class="form-button form-btn"
+              type="submit"
+            >
+              Confirm
+            </button>
+          </div>
+        </form>
+      `;
+      modalFormElement.innerHTML = form_html;
+      const prop = {
+        mode: 'edit',
+        id: e.target.closest('[data-id]').dataset.id,
+        data,
+      };
+      openModal(prop);
+    } else if (
+      e.target.closest('[data-mode]') &&
+      (e.target.closest('[data-mode]').dataset.mode == 'delete' ||
+        e.target.closest('[data-mode]').dataset.mode == 'archive')
+    ) {
+      const closeSVG = require('../images/close-svgrepo-com.svg');
+      const title =
+        e.target.closest('[data-mode]').dataset.mode === 'delete'
+          ? 'Delete note'
+          : 'Archive note';
+      const operationName =
+        e.target.closest('[data-mode]').dataset.mode === 'delete'
+          ? 'deleted'
+          : 'archived';
+      const noteName =
+        e.target.parentElement.parentElement.children[1].innerHTML;
+      form_html = `
+        <form class="delete-archive-form">
+          <div>
+            <h3 class="modal-title">${title}</h3>
+            <button type="button" class="btn-close" id="btn-close">
+              <img src="${closeSVG}" width="32" height="32" alt="close" />
+            </button>
+          </div>
+          <div class="delete-archive">
+            <p>
+              Note <strong>${noteName}</strong> will be ${operationName}. Press
+              <strong>OK</strong> for confirmation
+            </p>
+          </div>
+          <div class="form__btn-list">
+            <button id="btn-cancel" class="form-button form-btn" type="button">
+              Cancel
+            </button>
+            <button id="btn-confirm-${operationName}" class="form-button form-btn" type="submit">
+              Confirm
+            </button>
+          </div>
+        </form>
+      `;
+      modalFormElement.innerHTML = form_html;
+      const prop = {
+        mode: operationName,
+        id: e.target.closest('[data-id]').dataset.id,
+        data,
+      };
+      openModal(prop);
+    }
   };
-  // console.log(modalForm());
-  // document.addEventListener('click', modalForm);
   document
     .querySelector('.tableHeader')
     .addEventListener('click', e => modalForm(e, 'edit'));
+  document
+    .querySelector('.archivedList')
+    .addEventListener('click', e => modalForm(e, 'edit'));
   var btn = document.querySelector('.create-note');
   btn.addEventListener('click', e => {
-    console.log('first');
     modalForm(e, 'add');
-    // console.log(modalForm());
-    // modal.style.display = 'block';
-  });
-
-  document.addEventListener('click', e => {
-    if (e.target.classList.contains('modal_overlay')) {
-      closeModal();
-    }
   });
 
   document.addEventListener('click', e => {

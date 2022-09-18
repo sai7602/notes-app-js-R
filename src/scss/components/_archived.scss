@@ -1,0 +1,27 @@
+$table-archived-template: 20px 140px 1.3fr 1fr 140px 1.3fr 20px;
+
+.archivedTableHeaderCommon {
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  list-style-type: none;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: $table-archived-template;
+  grid-gap: 2vw;
+  margin: 0 0 20px;
+  background-color: lightgray;
+  border-radius: 10px;
+}
+.rawCommonArchived {
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  list-style-type: none;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: $table-archived-template;
+  grid-gap: 2vw;
+  margin: 0 0 20px;
+  background-color: lightgray;
+  border-radius: 10px;
+  background-color: rgb(248, 245, 245);
+}

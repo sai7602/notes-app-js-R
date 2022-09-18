@@ -1,0 +1,27 @@
+$table-summary-template: 20px 1fr 1fr 1fr;
+
+.summaryTableHeaderCommon {
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  list-style-type: none;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: $table-summary-template;
+  grid-gap: 2vw;
+  margin: 0 0 20px;
+  background-color: lightgray;
+  border-radius: 10px;
+}
+.rawCommonSummary {
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  list-style-type: none;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: $table-summary-template;
+  grid-gap: 2vw;
+  margin: 0 0 20px;
+  background-color: lightgray;
+  border-radius: 10px;
+  background-color: rgb(248, 245, 245);
+}

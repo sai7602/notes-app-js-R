@@ -1,19 +1,26 @@
-$table-template: 1fr 3fr 1fr 1fr 3fr 1fr 1fr 1fr 1fr;
+$table-template: 20px 140px 1.3fr 1fr 140px 1.3fr 20px 20px 20px;
 
 .container {
   margin: 0 auto;
-  // background-color: red;
+  row-gap: 50px;
+  flex-direction: column;
   display: flex;
   justify-content: center;
   width: 90vw;
 }
 .dataList {
-  height: 54px;
-  width: 688px;
+  height: 36px;
   padding: 10px 21px 8px 20px;
   line-height: 1.13;
   border-bottom: 1px solid #dcdcdf;
   box-shadow: 0 1px 0 hsl(0deg 0% 100% / 60%);
+}
+.create-note {
+  float: right;
+}
+.title {
+  text-align: center;
+  margin-bottom: 20px;
 }
 .tableHeaderCommon {
   -webkit-justify-content: space-between;
@@ -95,4 +102,27 @@ $table-template: 1fr 3fr 1fr 1fr 3fr 1fr 1fr 1fr 1fr;
   display: flex;
 
   fill: aqua;
+}
+.buttonArchive,
+.buttonDelete,
+.buttonEdit {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  margin: 0;
+  &:hover {
+    cursor: pointer;
+    // background-color: #fff;
+    // border: 2px solid #d05300;
+    // box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    //   rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  }
+}
+.noteName,
+.noteCreateDate,
+.noteCatName,
+.noteContent,
+.noteModificationDate {
+  overflow: auto;
 }
