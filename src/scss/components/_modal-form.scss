@@ -28,11 +28,26 @@
     padding: 0;
   }
 }
+.delete-archive-form {
+  padding: 48px 20px 40px 20px;
+
+  width: 360px;
+  height: 75px;
+}
+.delete-archive {
+  margin-bottom: 30px;
+}
+.modal-title {
+  position: absolute;
+  top: 8px;
+  left: 20px;
+}
 #nameInput {
   padding: 0;
   display: block;
   width: 100%;
   margin-bottom: 20px;
+  border: 1px solid rgb(51, 51, 51);
 }
 #contentInput {
   padding: 0;
@@ -40,11 +55,13 @@
   height: 50px;
   width: 100%;
   margin-bottom: 20px;
+  border: 1px solid rgb(51, 51, 51);
 }
 #category {
   padding: 0;
   width: 100%;
   margin-bottom: 20px;
+  border: 1px solid rgb(51, 51, 51);
 }
 .form {
   padding: 48px 20px 40px 20px;
