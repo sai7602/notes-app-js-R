@@ -11,7 +11,7 @@ const archivedNote = data => {
     <p class=" noteCreateDate">${data.createDate}</p>
     <p class="noteCatName">${data.catName}</p>
     <p class="noteContent">${data.content}</p>
-    <p class="noteModificationDate ">${data.modificationDate}</p>
+    <p class="noteModificationDate ">${data.modificationDate.join(', ')}</p>
 
     <div
       class="buttonArchive"

@@ -4,15 +4,25 @@ import categories from './categories';
 import renderPage from './renderPage';
 import addRecordModal from './addRecordModal';
 import openModal from './openModal';
+import initData from './initData';
 
 document.addEventListener('DOMContentLoaded', () => {
   const modalFormElement = document.getElementById('modal_form');
   const createNoteBtn = document.querySelector('.create-note');
-  const data = JSON.parse(localStorage.getItem('list')) || [];
+  const data = JSON.parse(localStorage.getItem('list')) || initData;
+  const clearStorage = document.querySelector('.clear');
 
-  createNoteBtn.addEventListener('click', e => {
-    modalForm(e);
-  });
+  try {
+    clearStorage.addEventListener('click', () => {
+      localStorage.removeItem('list');
+      renderPage();
+    });
+    createNoteBtn.addEventListener('click', e => {
+      modalForm(e);
+    });
+  } catch (error) {
+    console.log(error);
+  }
 
   renderPage();
 
@@ -25,7 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
       .getElementById('modal_form')
       .closest('.modal_overlay')
       .classList.remove('active');
-    modalFormElement.innerHTML = '';
+    try {
+      modalFormElement.innerHTML = '';
+    } catch (error) {
+      console.log(error);
+    }
   };
   const optionList = (selected = '1') =>
     categories
@@ -105,7 +119,11 @@ ${contentInputValue}</textarea
           </div>
         </form>
       `;
-      modalFormElement.innerHTML = form_html;
+      try {
+        modalFormElement.innerHTML = form_html;
+      } catch (error) {
+        console.log(error);
+      }
       const prop = {
         mode: 'edit',
         id: e.target.closest('[data-id]').dataset.id,
@@ -152,7 +170,11 @@ ${contentInputValue}</textarea
           </div>
         </form>
       `;
-      modalFormElement.innerHTML = form_html;
+      try {
+        modalFormElement.innerHTML = form_html;
+      } catch (error) {
+        console.log(error);
+      }
       const prop = {
         mode: operationName,
         id: e.target.closest('[data-id]').dataset.id,

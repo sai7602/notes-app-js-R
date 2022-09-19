@@ -2,8 +2,9 @@ import archivedNote from './notes/archivedNote';
 import createNote from './notes/createNote';
 import categories from './categories';
 import summaryNotes from './notes/summaryNotes';
+import initData from './initData';
 const renderPage = () => {
-  const data = JSON.parse(localStorage.getItem('list')) || [];
+  const data = JSON.parse(localStorage.getItem('list')) || initData;
 
   const allSummary = [];
   const renderNotes = data
