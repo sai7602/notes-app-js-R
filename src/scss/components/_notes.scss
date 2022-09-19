@@ -39,7 +39,7 @@ $table-template: 20px 140px 1.3fr 1fr 140px 1.3fr 20px 20px 20px;
   justify-content: space-between;
   list-style-type: none;
   display: grid;
-  grid-template-rows: 1fr;
+  height: auto;
   grid-template-columns: $table-template;
   grid-gap: 2vw;
   margin: 0 0 20px;
@@ -125,4 +125,8 @@ $table-template: 20px 140px 1.3fr 1fr 140px 1.3fr 20px 20px 20px;
 .noteContent,
 .noteModificationDate {
   overflow: auto;
+  overflow-wrap: anywhere;
+}
+.clear {
+  cursor: pointer;
 }
