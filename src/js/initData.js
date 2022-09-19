@@ -2,8 +2,7 @@ const initData = [
   {
     catId: '1',
     catName: 'Task',
-    catImg:
-      'http://localhost:1234/shopping-cart-svgrepo-com.9508c7a8.svg?1663524232839',
+    catImg: require(`../images/shopping-cart-svgrepo-com.svg`),
     createDate: '9/19/2022',
     content: 'Lorem ipsum dolor sit',
     nameInput: 'Some task',
@@ -15,8 +14,7 @@ const initData = [
   {
     catId: '1',
     catName: 'Task',
-    catImg:
-      'http://localhost:1234/shopping-cart-svgrepo-com.9508c7a8.svg?1663524265703',
+    catImg: require(`../images/shopping-cart-svgrepo-com.svg`),
     createDate: '9/19/2022',
     content: 'Lorem ipsum dolor sit',
     nameInput: 'Some task',
@@ -28,8 +26,7 @@ const initData = [
   {
     catId: '1',
     catName: 'Task',
-    catImg:
-      'http://localhost:1234/shopping-cart-svgrepo-com.9508c7a8.svg?1663524302175',
+    catImg: require(`../images/shopping-cart-svgrepo-com.svg`),
     createDate: '9/15/2022',
     content: 'Lorem ipsum dolor sit',
     nameInput: 'Some task',
@@ -41,8 +38,7 @@ const initData = [
   {
     catId: '1',
     catName: 'Task',
-    catImg:
-      'http://localhost:1234/shopping-cart-svgrepo-com.9508c7a8.svg?1663525328471',
+    catImg: require(`../images/shopping-cart-svgrepo-com.svg`),
     createDate: '9/14/2022',
     content: 'Lorem ipsum dolor sit',
     nameInput: 'Some task',
@@ -54,8 +50,7 @@ const initData = [
   {
     catId: '2',
     catName: 'Random Thought',
-    catImg:
-      'http://localhost:1234/idea-think-svgrepo-com.6b480950.svg?1663525328471',
+    catImg: require(`../images/idea-think-svgrepo-com.svg`),
     createDate: '9/16/2022',
     content: 'Lorem ipsum dolor sit',
     nameInput: 'Some task',
@@ -67,8 +62,7 @@ const initData = [
   {
     catId: '4',
     catName: 'Quote',
-    catImg:
-      'http://localhost:1234/quote-right-svgrepo-com.843e6bd2.svg?1663525328471',
+    catImg: require(`../images/quote-right-svgrepo-com.svg`),
     createDate: '9/17/2022',
     content: 'Lorem ipsum dolor sit',
     nameInput: 'Some task',
@@ -80,8 +74,7 @@ const initData = [
   {
     catId: '1',
     catName: 'Task',
-    catImg:
-      'http://localhost:1234/shopping-cart-svgrepo-com.9508c7a8.svg?1663565808733',
+    catImg: require(`../images/shopping-cart-svgrepo-com.svg`),
     createDate: '9/18/2022',
     content: 'Lorem ipsum dolor sit',
     nameInput: 'Some task',
@@ -93,8 +86,7 @@ const initData = [
   {
     catId: '1',
     catName: 'Task',
-    catImg:
-      'http://localhost:1234/shopping-cart-svgrepo-com.9508c7a8.svg?1663565808733',
+    catImg: require(`../images/shopping-cart-svgrepo-com.svg`),
     createDate: '9/18 /2022',
     content: 'Lorem ipsum dolor sit',
     nameInput: 'Some task',
