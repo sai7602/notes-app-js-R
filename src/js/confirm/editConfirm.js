@@ -7,7 +7,7 @@ import initData from '../initData';
 const confirmEdit = (inputData, localData) => {
   const data = JSON.parse(localStorage.getItem('list')) || initData;
   const category = categories.filter(cat => cat.catId === inputData.categoryID);
-  editedElem = data.map(el => {
+  const editedElem = data.map(el => {
     if (el.recordId == inputData.id) {
       el.content = inputData.contentInput;
       el.nameInput = inputData.nameInput;
