@@ -2,7 +2,7 @@ import openModal from './openModal';
 const addRecordModal = (optionList, data) => {
   const closeSVG = require('../images/close-svgrepo-com.svg');
   const title = 'Add note';
-  form_html = `
+  let form_html = `
     <form class="form">
       <div>
         <h3 class="modal-title">${title}</h3>

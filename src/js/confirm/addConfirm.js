@@ -19,7 +19,7 @@ const confirm = (inputData, localData) => {
       nameInput: inputData.nameInput,
       mode: inputData.mode,
       recordId: Date.now() + Math.round(Math.random() * 1000),
-      modificationDate: '',
+      modificationDate: [],
       archived: false,
     };
     data.push(record);
